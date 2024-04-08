@@ -1,29 +1,27 @@
 const express = require('express');
 const path = require('path');
+const hbs = require('express-handlebars');
 
 const app = express();
 
-app.use((req, res, next) => {
-  res.show = (name) => {
-    res.sendFile(path.join(__dirname, `/views/${name}`))
-  };
-  next();
-});
+app.engine('.hbs', hbs());
+app.set('view engine', '.hbs');
 
 app.use('/user', (req, res, next) => {
-  res.show('login.html');
+  res.render('login', { layout: false });
 });
 
 app.get('/', (req, res) => {
-  res.show('index.html');
+  res.render('index', { layout: false })
 });
 
 app.get('/home', (req, res) => {
-  res.show('index.html');
+  res.render('index', { layout: false })
 });
 
 app.get('/hello/:name', (req, res) => {
-  res.send(`Hello ${req.params.name}`);
+  res.render(`Hello`, { layout: false, name: req.params.name });
+  console.log(req);
 });
 
 app.use((req, res) => {
