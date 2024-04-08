@@ -8,19 +8,35 @@ app.engine('.hbs', hbs());
 app.set('view engine', '.hbs');
 
 app.use('/user', (req, res, next) => {
-  res.render('login', { layout: false });
+  res.render('login');
 });
 
 app.get('/', (req, res) => {
-  res.render('index', { layout: false })
+  res.render('index')
 });
 
 app.get('/home', (req, res) => {
-  res.render('index', { layout: false })
+  res.render('index')
+});
+
+app.get('/about', (req, res) => {
+  res.render('about')
+});
+
+app.get('/contact', (req, res) => {
+  res.render('contact')
+});
+
+app.get('/info', (req, res) => {
+  res.render('info')
+});
+
+app.get('/history', (req, res) => {
+  res.render('history')
 });
 
 app.get('/hello/:name', (req, res) => {
-  res.render(`Hello`, { layout: false, name: req.params.name });
+  res.render(`Hello`, { name: req.params.name });
   console.log(req);
 });
 
